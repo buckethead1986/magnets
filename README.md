@@ -1,5 +1,9 @@
 Check out the app here: https://mag-nets.herokuapp.com/
 
+Major rehaul of the website was completed, the new code (similar, but with an
+updated Material-UI framework, website layout, and nested react routes) can be
+found at https://github.com/buckethead1986/magnets-update.
+
 
 ## Overview
 
