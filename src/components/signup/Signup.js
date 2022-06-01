@@ -1,5 +1,7 @@
 import React from "react";
 import { RaisedButton, TextField } from "material-ui";
+import { Link } from "react-router-dom";
+import Demo from "../demo/Demo.js";
 const defaultImage =
   "http://www.dltk-kids.com/puzzles/jigsaw/2013/puzzle-images/1222.jpg";
 
@@ -75,15 +77,19 @@ class Signup extends React.Component {
           </p>
           <p />
           <p style={styles}>
-            Magnets is a fridge magnet poetry game. Login (or Sign up if you're
-            not a user yet) and create fun little poems and sayings with
-            draggable 'magnetic' words.{" "}
+            Magnets is a fridge magnet poetry game. Login or Sign up and create
+            fun little poems and sayings with draggable 'magnetic' words.{" "}
           </p>
           <p />
           <p style={styles}>
             Change the word set for new poems, customize your avatar, browse all
             the poems (or just those of Users of your choice), favorite and
             follow other Users and their creations, and have some fun!
+          </p>
+
+          <p />
+          <p style={styles}>
+            Click <Link to="/tutorial">here</Link> for a tutorial
           </p>
         </div>
         <h2>Sign Up</h2>

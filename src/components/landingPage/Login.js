@@ -57,28 +57,6 @@ class Login extends React.Component {
 
     return (
       <div>
-        <p />
-        <div style={{ align: "center" }}>
-          <p style={{ ...styles, fontSize: 24, textAlign: "center" }}>
-            Welcome to Magnets!
-          </p>
-          <p />
-          <p style={styles}>
-            Magnets is a fridge magnet poetry game. Login or Sign up nd create
-            fun little poems and sayings with draggable 'magnetic' words.{" "}
-          </p>
-          <p />
-          <p style={styles}>
-            Change the word set for new poems, customize your avatar, browse all
-            the poems (or just those of Users of your choice), favorite and
-            follow other Users and their creations, and have some fun!
-          </p>
-
-          <p />
-          <p style={styles}>
-            Click <Link to="/tutorial">here</Link> for a tutorial
-          </p>
-        </div>
         <h2>Login</h2>
         <form>
           {this.state.loginError === true ? (

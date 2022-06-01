@@ -2,10 +2,11 @@ import React from "react";
 import { RaisedButton, TextField } from "material-ui";
 import { Link } from "react-router-dom";
 import Demo from "../demo/Demo.js";
+const defaultImage =
+  "http://www.dltk-kids.com/puzzles/jigsaw/2013/puzzle-images/1222.jpg";
 
 const styles = {
   textAlign: "left",
-  align: "left",
   maxWidth: "600px",
   margin: "0 auto",
   fontSize: "20px"
@@ -13,11 +14,11 @@ const styles = {
 
 //Login and Signup buttons don't automatically submit on 'enter', and I spent a long time trying to fix that issue.
 //If you know a workaround, please let me know!
-class Login extends React.Component {
+class Signup extends React.Component {
   state = {
     username: "",
     password: "",
-    loginError: false
+    signupError: false
   };
 
   handleChange = e => {
@@ -26,7 +27,21 @@ class Login extends React.Component {
     });
   };
 
-  handleLogin = () => {
+  handleSubmit = event => {
+    event.preventDefault();
+    const headers = {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    };
+    const body = { ...this.state, image: defaultImage };
+    fetch(`${this.props.url}/users`, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(body)
+    }).then(() => this.login());
+  };
+
+  login = () => {
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json"
@@ -51,42 +66,18 @@ class Login extends React.Component {
       .then(() => this.props.history.push("/profile"));
   };
 
-  //All the red is from the single quote in "you're" (line 63). I spent some time researching this and it appears to be a 'Yeah, but it doesnt break, so theres no pressure to fix it' issue
+  //All the red is from the single quote in "you're" (line 78). I spent some time researching this and it appears to be a 'Yeah, but it doesnt break, so theres no pressure to fix it' issue
   render() {
-    // const link = <a href={this.props.history.push("/profile")}>log in</a>;
-
     return (
       <div>
-        <p />
-        <div style={{ align: "center" }}>
-          <p style={{ ...styles, fontSize: 24, textAlign: "center" }}>
-            Welcome to Magnets!
-          </p>
-          <p />
-          <p style={styles}>
-            Magnets is a fridge magnet poetry game. Login or Sign up nd create
-            fun little poems and sayings with draggable 'magnetic' words.{" "}
-          </p>
-          <p />
-          <p style={styles}>
-            Change the word set for new poems, customize your avatar, browse all
-            the poems (or just those of Users of your choice), favorite and
-            follow other Users and their creations, and have some fun!
-          </p>
-
-          <p />
-          <p style={styles}>
-            Click <Link to="/tutorial">here</Link> for a tutorial
-          </p>
-        </div>
-        <h2>Login</h2>
+        <h2>Sign Up</h2>
         <form>
-          {this.state.loginError === true ? (
+          {this.state.signupError ? (
             <TextField
               onChange={this.handleChange}
               name="username"
               hintText="Username"
-              errorText="Username or Password incorrect"
+              errorText="Username already taken!"
             />
           ) : (
             <TextField
@@ -98,28 +89,29 @@ class Login extends React.Component {
           <br />
           <TextField
             onChange={this.handleChange}
-            type="password"
             name="password"
             hintText="Password"
+            type="password"
           />
         </form>
         <br />
         <RaisedButton
-          label="Login"
+          label="Submit"
           type="submit"
           primary={true}
-          onClick={this.handleLogin}
+          onClick={this.handleSubmit}
         />
         <br />
         <RaisedButton
-          label="Click here to sign up"
+          label="Back to Login"
           labelStyle={{ fontSize: "12px" }}
           primary={false}
-          onClick={this.props.signup}
+          onClick={this.props.login}
         />
+        <p />
       </div>
     );
   }
 }
 
-export default Login;
+export default Signup;

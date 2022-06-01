@@ -10,6 +10,11 @@ import ProfileContainer from "./components/containers/ProfileContainer";
 import ChangeProfileImage from "./components/profile/ChangeProfileImage";
 import Tutorial from "./components/tutorial/Tutorial";
 
+//landing page is new, not working yet. I want the login.signup page to be in the menu,
+//and for a 'Demo' mode to exist so you can make poems without a profile
+import LandingPage from "./components/landingPage/LandingPage.js";
+import LandingPageNavbar from "./components/landingPage/LandingPageNavbar";
+
 const url = "https://magnets-api.herokuapp.com/api/v1";
 // const url = "http://localhost:3001/api/v1";
 
@@ -34,6 +39,7 @@ class App extends Component {
       if (!window.location.href.includes("signup")) {
         this.props.history.push("/login");
       }
+      // this.props.history.push("/landing");
     }
   }
 
@@ -298,6 +304,7 @@ class App extends Component {
       <div>
         {this.props.location.pathname !== "/login" &&
         this.props.location.pathname !== "/signup" &&
+        this.props.location.pathname !== "/landing" &&
         this.props.location.pathname !== "/tutorial" ? (
           <Navbar
             logout={this.logout}
@@ -336,6 +343,32 @@ class App extends Component {
                 signup={this.signup}
                 {...props}
               />
+            )}
+          />
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <Route
+            exact
+            path="/landing"
+            render={props => (
+              <div>
+                <LandingPageNavbar
+                  login={this.login}
+                  signup={this.signup}
+                  logout={this.logout}
+                  makePoem={this.makePoem}
+                  profileLink={this.profileLink}
+                  showUsers={this.showUsers}
+                  showPoems={this.showPoems}
+                  showTutorial={this.showTutorial}
+                />
+                <LandingPage
+                  url={url}
+                  fetchUsers={this.fetchUserInformation}
+                  signup={this.signup}
+                  {...props}
+                />
+              </div>
             )}
           />
         </div>
